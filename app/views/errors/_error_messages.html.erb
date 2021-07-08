@@ -1,0 +1,11 @@
+<!--Partial view for displaying errors-->
+<% if object && object.errors.size > 0 %>
+	<div class="row mb-3">
+		<span class="text-danger fw-bold">Error: </span>
+		<ol class="ms-5">
+			<% object.errors.full_messages.each do |msg| %>
+				<li style="list-style-position: inside"><span class="text-danger"><%= msg %></span></li>
+			<% end %>
+		</ol>
+	</div>
+<% end %>

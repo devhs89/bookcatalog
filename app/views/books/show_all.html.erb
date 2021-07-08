@@ -1,0 +1,39 @@
+<!--The view that displays all the books-->
+<div class="row row-cols-2 mb-3 mb-md-0">
+  <div class="col">
+    <%= link_to "Categories", categories_path, class: 'btn btn-dark' %>
+  </div>
+  <div class="col">
+    <%= link_to "Home", books_path, class: 'pull-right btn btn-dark' %>
+  </div>
+</div>
+<div class="row mb-3">
+  <div class="col-12 text-center">
+    <h2>All Books</h2>
+  </div>
+</div>
+<div class="table-responsive">
+  <table class="table table-hover table-style">
+    <thead class="table-dark">
+    <tr>
+      <th scope="col" class="ps-md-3">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Author</th>
+      <th scope="col">Publish Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @books.each do |book| %>
+      <tr data-link="<%= book_path(book.id) %>">
+        <td class="ps-md-3 fw-bold"><%= book.id %></td>
+        <td><%= book.title.titleize %></td>
+        <td><%= book.author.titleize %></td>
+        <td><%= book.publish_date %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+<!--Importing the javascript file that is needed for this view-->
+<%= javascript_pack_tag 'table_links' %>

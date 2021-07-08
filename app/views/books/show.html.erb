@@ -1,0 +1,86 @@
+<!--The view that displays a particular book.-->
+<div class="row row-cols-2 mb-3 mb-md-0">
+  <div class="col">
+    <%= link_to "All Books", show_all_books_path, class: 'btn btn-dark' %>
+  </div>
+  <div class="col">
+    <%= link_to "Home", books_path, class: 'pull-right btn btn-dark' %>
+  </div>
+</div>
+<% if session[:admin_email] %>
+  <div class="row row-cols-1 row-cols-md-2 border-bottom border-dark py-2 mb-3 justify-content-center">
+    <div class="col-auto col-md-auto px-md-4">
+      <span class="fs-4">Admin Controls</span>
+    </div>
+    <div class="col-auto col-md-auto px-md-4">
+      <div class="row justify-content-center justify-content-md-start">
+        <div class="col-auto">
+          <%= link_to "Edit", edit_book_path, class: 'btn btn-primary' %>
+        </div>
+        <div class="col-auto">
+          <%= link_to "Delete", delete_book_path, class: 'btn btn-danger' %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+<div class="row mb-3">
+  <div class="col-12 text-center">
+    <h2><%= @book.title.titleize %></h2>
+  </div>
+</div>
+<div class="row row-cols-1 row-cols-md-2">
+  <div class="col-auto col-md-3 mb-3">
+    <% if @book.coverPic.attached? %>
+      <img src="<%= url_for @book.coverPic %>" class="img-thumbnail" alt="IMAGE NOT AVAILABLE">
+    <% end %>
+  </div>
+  <div class="col-auto col-md-9 table-responsive">
+    <table class="table">
+      <thead class="table-dark">
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Author</th>
+        <th scope="col">Category</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><%= @book.title.titleize %></td>
+        <td><%= @book.author.titleize %></td>
+        <% @book.categories.each do |category| %>
+          <td><%= category.name.capitalize %></td>
+        <% end %>
+      </tr>
+      </tbody>
+    </table>
+    <table class="table">
+      <thead class="table-dark">
+      <tr>
+        <th scope="col">Publish Date</th>
+        <th scope="col">Created On</th>
+        <th scope="col">Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><%= @book.publish_date %></td>
+        <td><%= @book.created_at %></td>
+        <td><%= @book.description %></td>
+      </tr>
+      </tbody>
+    </table>
+    <table class="table">
+      <thead class="table-dark">
+      <tr>
+        <th>Overview</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><%= @book.content %></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

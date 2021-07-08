@@ -1,0 +1,17 @@
+<!--The partial view to be rendered in "Edit" & "New" views.-->
+<div class="row col-12 col-md-9 mx-auto mb-3">
+  <%= error_messages_for(form.object) %>
+</div>
+<div class="row col-lg-7 row-cols-1 gap-2 mx-lg-auto">
+  <div class="col-12">
+    <%= form.label :name, 'Category Name' %>
+    <%= form.text_field :name, class: 'form-control', 'aria-describedby' => 'small-help', required: true %>
+    <div class="invalid-feedback">Invalid Input</div>
+    <div id="small-help" class="form-text">
+      Can be upto 30 characters long, contain letters, numbers or an underscore.
+    </div>
+  </div>
+  <div class="col-12">
+    <%= form.submit "Submit", class: 'btn btn-primary' %>
+  </div>
+</div>

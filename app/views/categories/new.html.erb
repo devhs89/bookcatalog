@@ -1,0 +1,20 @@
+<!--View to create new category-->
+<div class="row row-cols-2 mb-3 mb-md-0">
+  <div class="col">
+    <%= link_to "Categories", categories_path, class: 'btn btn-dark' %>
+  </div>
+  <div class="col">
+    <%= link_to "Home", books_path, class: 'pull-right btn btn-dark' %>
+  </div>
+</div>
+<div class="row mb-3">
+  <div class="col-12 text-center">
+    <h2>Add New Category</h2>
+  </div>
+</div>
+<%= form_with model: @category, html: { class: 'needs-validation', novalidate: true } do |form| %>
+  <!--Rendering the partial view-->
+  <%= render :partial => 'new_edit', locals: { form: form } %>
+<% end %>
+
+<%= javascript_pack_tag 'bootstrap_validation' %>

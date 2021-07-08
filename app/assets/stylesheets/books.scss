@@ -1,0 +1,28 @@
+// Place all the styles related to the Books controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.books-list-div:hover {
+  background-color: #e0e0e0;
+  border-color: #e0e0e0;
+}
+
+.books-id {
+  background-color: #212529 !important;
+  color: #f8f9fa !important;
+}
+
+.table-style tbody tr:hover {
+  cursor: pointer;
+}
+
+.div.table-responsive {
+  overflow-x: auto !important;
+}
+
+@media (min-width: 768px) {
+  .books-id {
+    background-color: transparent !important;
+    color: #212529 !important;
+  }
+}

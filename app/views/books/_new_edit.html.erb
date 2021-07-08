@@ -1,0 +1,39 @@
+<!--The partial view that is used for "new" and "edit" views.-->
+<div class="row col-12 col-md-9 mb-3 mx-auto">
+  <%= error_messages_for(form.object) %>
+</div>
+<div class="col-12 col-lg-9 mx-auto">
+  <div class="row row-cols-1 row-cols-md-2">
+    <div class="col mb-3">
+      <%= form.label :title, class: 'form-label' %>
+      <%= form.text_field :title, class: 'form-control', required: true %>
+    </div>
+    <div class="col mb-3">
+      <%= form.label :author, class: 'form-label' %>
+      <%= form.text_field :author, class: 'form-control', required: true %>
+    </div>
+    <div class="col col-md-12 mb-3">
+      <%= form.label :coverPic, 'Cover Picture', class: 'form-label' %>
+      <%= form.file_field :coverPic, class: 'form-control' %>
+    </div>
+    <div class="col mb-3">
+      <%= form.label :category, class: 'form-label' %>
+      <%= form.text_field :category, value: @category, class: 'form-control', required: true %>
+    </div>
+    <div class="col mb-3">
+      <%= form.label :publish_date, class: 'form-label' %>
+      <%= form.text_field :publish_date, class: 'form-control', required: true %>
+    </div>
+    <div class="col col-md-12 mb-3">
+      <%= form.label :description, class: 'form-label' %>
+      <%= form.text_field :description, class: 'form-control' %>
+    </div>
+    <div class="col col-md-12 mb-3">
+      <%= form.label :content, class: 'form-label' %>
+      <%= form.text_area :content, class: 'form-control' %>
+    </div>
+    <div class="col col-md-12">
+      <%= form.submit "Submit", class: 'btn btn-primary px-5' %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+<!--The view that asks for admin confirmation before deleting the book.-->
+<div class="row mb-3">
+	<div class="col-2">
+		<%= link_to "Back", book_path, class: 'btn btn-dark' %>
+	</div>
+	<div class="col-8 text-center">
+		<h2>Delete "<span class="text-danger"><%= @book.title.titleize %></span>" Book</h2>
+	</div>
+	<div class="col-2">
+		<%= link_to "All Books", show_all_books_path, class: 'pull-right btn btn-dark' %>
+	</div>
+</div>
+<div>
+	<div class="row col-7 mx-auto">
+		<div class="row text-center mb-3">
+			<span>Are you sure you want to delete this book?</span>
+		</div>
+		<div class="row gx-2">
+			<div class="col-6">
+				<%= link_to 'Cancel', book_path, class: 'btn btn-primary pull-right' %>
+			</div>
+			<div class="col-6">
+				<%= form_with model: @book, method: 'delete' do |form| %>
+					<%= form.submit 'Delete', class: 'btn btn-danger' %>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>
+

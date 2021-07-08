@@ -1,0 +1,84 @@
+<!--The home page-->
+<div class="row row-cols-2 mb-3 mb-md-0">
+  <div class="col">
+    <%= link_to "All Books", show_all_books_path, class: 'btn btn-dark' %>
+  </div>
+  <div class="col">
+    <%= link_to "Categories", categories_path, class: 'pull-right btn btn-dark' %>
+  </div>
+</div>
+<div class="row mb-3">
+  <div class="col-12 text-center">
+    <h2 class="text-dark">New Releases</h2>
+  </div>
+</div>
+<div class="row row-cols-1 row-cols-md-2">
+  <div class="col col-md-8">
+    <!--The section that displays the recently released books-->
+    <%= form_with url: books_path do %>
+      <% @recent_books.each do |book| %>
+        <%= link_to book_path(book.id), class: 'text-decoration-none' do %>
+          <div class="row row-cols-1 row-cols-md-3 text-dark mb-3 mb-md-2 books-list-div">
+            <div class="col-12 col-md-auto fs-6 text-center mb-2 books-id">
+              <%= "##{book.id}" %>
+            </div>
+            <div class="col-12 col-md-1 mb-2 mx-auto">
+              <% if book.coverPic.attached? %>
+                <img src="<%= url_for book.coverPic %>" class="img-thumbnail" alt="Image">
+              <% end %>
+            </div>
+            <div class="col-12 col-md-9 mb-2">
+              <div class="list-group-horizontal fw-bold">
+                <span><%= book.title.titleize %></span><br>
+                <span><%= book.author.titleize %></span>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="col-md-4">
+    <%= form_with url: 'categories/search',
+                  html: { class: 'needs-validation', novalidate: true }, method: 'get' do |form| %>
+      <div class="row row-cols-1 border-top border-bottom pt-2 gap-2">
+        <div class="col">
+          <%= form.text_field :searchBooks, class: (params[:none] ? 'form-control is-invalid' : 'form-control'),
+                              placeholder: "Search by Category", required: true %>
+          <% if params[:none] %>
+            <div class="invalid-feedback">Category not found.</div>
+          <% end %>
+        </div>
+        <div class="col">
+          <%= button_tag type: "submit", class: "btn btn-primary px-3 mb-2" do %>
+            Search
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+    <div class="row pt-3 row-cols-1 row-cols-xl-2 g-1">
+      <!--The admin console is only shown when admin is logged in.-->
+      <div class="col-12 col-xl-12 text-center">
+        <h4>Admin Console</h4>
+      </div>
+      <% if session[:admin_email] %>
+        <div class="col d-grid gap-1">
+          <%= link_to 'Add Category', new_category_path, class: 'btn btn-outline-primary' %>
+          <%= link_to 'Edit Category', categories_path, class: 'btn btn-outline-primary' %>
+          <%= link_to 'Delete Category', categories_path, class: 'btn btn-outline-primary' %>
+        </div>
+        <div class="col d-grid gap-1">
+          <%= link_to 'Add Book', new_book_path, class: 'btn btn-outline-primary' %>
+          <%= link_to 'Edit Book', show_all_books_path, class: 'btn btn-outline-primary' %>
+          <%= link_to 'Delete Book', show_all_books_path, class: 'btn btn-outline-primary' %>
+        </div>
+      <% else %>
+        <div class="col-12 col-xl-12 text-center">
+          <%= link_to 'Login', admins_login_path, class: 'btn btn-dark' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<%= javascript_pack_tag 'bootstrap_validation' %>

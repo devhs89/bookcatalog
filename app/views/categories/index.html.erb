@@ -1,0 +1,38 @@
+<div class="row row-cols-2 mb-3 mb-md-0">
+  <div class="col">
+    <%= link_to "All Books", show_all_books_path, class: 'btn btn-dark' %>
+  </div>
+  <div class="col">
+    <%= link_to "Home", books_path, class: 'pull-right btn btn-dark' %>
+  </div>
+</div>
+<div class="row mb-3">
+  <div class="col-12 text-center">
+    <h2>All Categories</h2>
+  </div>
+</div>
+<!--View that displays all categories with admin controls if admin is logged in.-->
+<% if session[:admin_email] %>
+  <div class="col-md-9 w-100">
+    <% @categories.each do |category| %>
+      <div class="row row-cols-1 row-cols-md-2 mb-3 justify-content-center">
+        <div class="col d-grid">
+          <%= link_to category.name.capitalize, category_path(category), class: 'btn btn-outline-primary mb-1' %>
+        </div>
+        <div class="col col-md-auto">
+          <%= link_to 'Edit', edit_category_path(category), class: 'btn btn-primary me-1' %>
+          <%= link_to 'Delete', delete_category_path(category), class: 'btn btn-danger' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <!--And just displays the list of categories otherwise.-->
+<% else %>
+  <div class="row row-cols-1 gap-2 justify-content-center">
+    <% @categories.each do |category| %>
+      <div class="col col-md-9 col-xl-6 d-grid">
+        <%= link_to category.name.capitalize, category_path(category), class: 'btn btn-outline-primary' %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
